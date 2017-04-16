@@ -36,10 +36,11 @@
             this.HierarchicalTreeGroupBox = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DistanceSettingsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DistanceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountObjectsNumericUpDown)).BeginInit();
@@ -63,14 +64,20 @@
             // 
             // DistanceDataGridView
             // 
+            this.DistanceDataGridView.AllowUserToAddRows = false;
+            this.DistanceDataGridView.AllowUserToDeleteRows = false;
+            this.DistanceDataGridView.AllowUserToResizeColumns = false;
+            this.DistanceDataGridView.AllowUserToResizeRows = false;
             this.DistanceDataGridView.ColumnHeadersHeight = 4;
             this.DistanceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DistanceDataGridView.ImeMode = System.Windows.Forms.ImeMode.Katakana;
             this.DistanceDataGridView.Location = new System.Drawing.Point(6, 48);
             this.DistanceDataGridView.Name = "DistanceDataGridView";
             this.DistanceDataGridView.RowHeadersWidth = 4;
             this.DistanceDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DistanceDataGridView.Size = new System.Drawing.Size(354, 295);
             this.DistanceDataGridView.TabIndex = 3;
+            this.DistanceDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DistanceDataGridView_CellValueChanged);
             // 
             // GenerateDistanceButton
             // 
@@ -103,6 +110,7 @@
             0,
             0,
             0});
+            this.CountObjectsNumericUpDown.ValueChanged += new System.EventHandler(this.CountObjectsNumericUpDown_ValueChanged);
             // 
             // CountObjectsLabel
             // 
@@ -136,41 +144,48 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.menuToolStripMenuItem,
+            this.runToolStripMenuItem,
+            this.aboutProgramToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(799, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // mToolStripMenuItem
+            // menuToolStripMenuItem
             // 
-            this.mToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.mToolStripMenuItem.Name = "mToolStripMenuItem";
-            this.mToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.mToolStripMenuItem.Text = "Menu";
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // aboutToolStripMenuItem
+            // runToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.aboutToolStripMenuItem.Text = "About program";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            // 
+            // aboutProgramToolStripMenuItem
+            // 
+            this.aboutProgramToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
+            this.aboutProgramToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.aboutProgramToolStripMenuItem.Text = "About program";
             // 
             // Form
             // 
@@ -207,10 +222,11 @@
         private System.Windows.Forms.GroupBox HierarchicalTreeGroupBox;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutProgramToolStripMenuItem;
     }
 }
 

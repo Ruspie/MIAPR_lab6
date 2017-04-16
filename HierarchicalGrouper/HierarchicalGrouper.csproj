@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HierarchicalGrouper.cs" />
+    <Compile Include="DistanceNode.cs" />
+    <Compile Include="Distances.cs" />
+    <Compile Include="HierarchicalTree.cs" />
+    <Compile Include="TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

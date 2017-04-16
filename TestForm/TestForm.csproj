@@ -78,5 +78,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HierarchicalGrouper\HierarchicalGrouper.csproj">
+      <Project>{cf465141-8f23-4f67-992e-1ab39ab5310a}</Project>
+      <Name>HierarchicalGrouper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

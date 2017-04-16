@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalGrouper", "HierarchicalGrouper.csproj", "{CF465141-8F23-4F67-992E-1AB39AB5310A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "..\TestForm\TestForm.csproj", "{3A9A020A-380A-4F23-8D8A-D2070398F4B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalGrouper", "HierarchicalGrouper.csproj", "{CF465141-8F23-4F67-992E-1AB39AB5310A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A9A020A-380A-4F23-8D8A-D2070398F4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A9A020A-380A-4F23-8D8A-D2070398F4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9A020A-380A-4F23-8D8A-D2070398F4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A9A020A-380A-4F23-8D8A-D2070398F4B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF465141-8F23-4F67-992E-1AB39AB5310A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
