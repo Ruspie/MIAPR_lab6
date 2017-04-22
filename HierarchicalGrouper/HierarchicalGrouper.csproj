@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DistanceNode.cs" />
     <Compile Include="Distances.cs" />
+    <Compile Include="HierarchicalGrouper.cs" />
     <Compile Include="HierarchicalTree.cs" />
     <Compile Include="TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

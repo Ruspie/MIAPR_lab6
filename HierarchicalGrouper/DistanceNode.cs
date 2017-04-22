@@ -4,20 +4,20 @@ namespace HierarchicalGrouper
 {
     class DistanceNode
     {
-        public String FirstNodeName { get; set; }
-        public String SecondNodeName { get; set; }
-        public int Distance { get; set; }
+        public String FirstId { get; set; }
+        public String SecondId { get; set; }
+        public double Distance { get; set; }
 
-        public DistanceNode(string firstNodeName, string secondNodeName, int distance)
+        public DistanceNode(string firstId, string secondId, double distance)
         {
-            FirstNodeName = firstNodeName;
-            SecondNodeName = secondNodeName;
+            FirstId = firstId;
+            SecondId = secondId;
             Distance = distance;
         }
 
         public override string ToString()
         {
-            return FirstNodeName + " -> " + SecondNodeName + " = " + Distance;
+            return FirstId + " -> " + SecondId + " = " + Distance;
         }
 
         public override bool Equals(object obj)
@@ -25,26 +25,35 @@ namespace HierarchicalGrouper
             if (obj == this) return true;
             DistanceNode distanceNode = obj as DistanceNode;
             if (distanceNode == null) return false;
-            if (FirstNodeName == distanceNode.FirstNodeName &&
-                SecondNodeName == distanceNode.SecondNodeName && Distance == distanceNode.Distance)
+            if (CrossEquals((DistanceNode) obj))
                 return true;
             return false;
         }
 
-        protected bool Equals(DistanceNode other)
+        public bool Equals(DistanceNode other)
         {
-            return string.Equals(FirstNodeName, other.FirstNodeName) ||
-                   string.Equals(SecondNodeName, other.SecondNodeName);
+            return string.Equals(FirstId, other.FirstId) ||
+                   string.Equals(SecondId, other.SecondId) ||
+                   string.Equals(FirstId, other.SecondId)||
+                   string.Equals(SecondId, other.FirstId);
         }
+
+        public bool CrossEquals(DistanceNode other) => FirstId == other.FirstId && SecondId == other.SecondId ||
+                                                       FirstId == other.SecondId && SecondId == other.FirstId;
 
         public override int GetHashCode()
         {
             unchecked {
-                var hashCode = (FirstNodeName != null ? FirstNodeName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SecondNodeName != null ? SecondNodeName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Distance;
+                var hashCode = FirstId != null ? FirstId.GetHashCode() : 0;
+                hashCode = (hashCode * 397) ^ (SecondId != null ? SecondId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int)Distance;
                 return hashCode;
             }
         }
+
+        public string ReplaceId(DistanceNode minimalDistanceNode, char id) =>
+            FirstId == minimalDistanceNode.FirstId || FirstId == minimalDistanceNode.SecondId
+                ? FirstId = id.ToString()
+                : SecondId = id.ToString();
     }
 }

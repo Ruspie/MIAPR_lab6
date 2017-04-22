@@ -8,7 +8,7 @@ namespace HierarchicalGrouper
         public TreeNode SecondNode { get; set; }
         public TreeNode ParentNode { get; set; }
         public String Name { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
 
         public TreeNode(string name, int value)
         {
@@ -19,7 +19,7 @@ namespace HierarchicalGrouper
             Value = value;
         }
 
-        public TreeNode(string name, int value, TreeNode firstNode, TreeNode secondNode)
+        public TreeNode(string name, double value, TreeNode firstNode, TreeNode secondNode)
         {
             FirstNode = firstNode;
             SecondNode = secondNode;
@@ -28,13 +28,19 @@ namespace HierarchicalGrouper
             Value = value;
         }
 
-        public TreeNode(string name, int value, TreeNode firstNode, TreeNode secondNode, TreeNode parentNode)
+        public TreeNode(string name, double value, TreeNode firstNode, TreeNode secondNode, TreeNode parentNode)
         {
             FirstNode = firstNode;
             SecondNode = secondNode;
             ParentNode = parentNode;
             Name = name;
-            value = value;
+            Value = value;
+        }
+
+        public override string ToString()
+        {
+            return "(" + FirstNode.Name + " - " + SecondNode.Name + ")" + " = " + Name + "(" + Value + ")" + " -> " +
+                   ParentNode?.Name;
         }
     }
 }

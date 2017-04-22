@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Activities.Statements;
 using System.Windows.Forms;
 using HierarchicalGrouper;
 
@@ -34,22 +28,42 @@ namespace TestForm
                 int columnWidth = (DistanceDataGridView.Width - DistanceDataGridView.RowHeadersWidth) / countObjects -
                                   1;
 
+                if (countObjects == 4) {
+                    DistanceDataGridView[0, 0].Value = 0;
+                    DistanceDataGridView[0, 1].Value = 3;
+                    DistanceDataGridView[0, 2].Value = 2;
+                    DistanceDataGridView[0, 3].Value = 1;
+
+                    DistanceDataGridView[1, 0].Value = 3;
+                    DistanceDataGridView[1, 1].Value = 0;
+                    DistanceDataGridView[1, 2].Value = 5;
+                    DistanceDataGridView[1, 3].Value = 2;
+
+                    DistanceDataGridView[2, 0].Value = 2;
+                    DistanceDataGridView[2, 1].Value = 5;
+                    DistanceDataGridView[2, 2].Value = 0;
+                    DistanceDataGridView[2, 3].Value = 3;
+
+                    DistanceDataGridView[3, 0].Value = 1;
+                    DistanceDataGridView[3, 1].Value = 2;
+                    DistanceDataGridView[3, 2].Value = 3;
+                    DistanceDataGridView[3, 3].Value = 0;
+                    
+                    return;
+                }
+
                 for (int i = 0; i < countObjects; i++) {
-                    if (columnWidth > 30)
-                        DistanceDataGridView.Columns[i].Width = columnWidth;
-                    else
-                        DistanceDataGridView.Columns[i].Width = 30;
+                    DistanceDataGridView.Columns[i].Width = columnWidth > 30 ? columnWidth : 30;
                 }
 
                 for (int i = 0; i < countObjects; i++) {
                     for (int j = 0; j < countObjects; j++) {
-                        if (i == j) {
+                        if (i == j)
                             DistanceDataGridView[i, j].Value = 0;
-                        }
                         else {
                             int value = random.Next(MinDistance, MaxDistance);
                             DistanceDataGridView[i, j].Value = value;
-                            DistanceDataGridView[countObjects - i - 1, countObjects - j - 1].Value = value;
+                            DistanceDataGridView[j, i].Value = value;
                         }
                     }
                 }
@@ -98,28 +112,36 @@ namespace TestForm
         private void DistanceDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (DistanceDataGridView[e.ColumnIndex, e.RowIndex].Value == null) return;
-            if (e.ColumnIndex == e.RowIndex) {
+            if (e.ColumnIndex == e.RowIndex)
                 DistanceDataGridView[e.ColumnIndex, e.RowIndex].Value = 0;
-            }
-            else {
-                int countObjects = DistanceDataGridView.ColumnCount;
-                DistanceDataGridView[countObjects - e.ColumnIndex - 1, countObjects - e.RowIndex - 1].Value =
+            else
+                DistanceDataGridView[e.RowIndex, e.ColumnIndex].Value =
                     DistanceDataGridView[e.ColumnIndex, e.RowIndex].Value;
-            }
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int[][] distances = new int[DistanceDataGridView.ColumnCount][];
-            for (int i = 0; i < DistanceDataGridView.ColumnCount; i++) {
-                distances[i] = new int[DistanceDataGridView.RowCount];
-                for (int j = 0; j < DistanceDataGridView.RowCount; j++) {
-                    distances[i][j] = int.Parse(DistanceDataGridView[i, j].Value.ToString());
+            try {
+                double[][] distances = new double[DistanceDataGridView.ColumnCount][];
+                for (int i = 0; i < DistanceDataGridView.ColumnCount; i++) {
+                    distances[i] = new double[DistanceDataGridView.RowCount];
+                    for (int j = 0; j < DistanceDataGridView.RowCount; j++)
+                        distances[i][j] = double.Parse(DistanceDataGridView[i, j].Value.ToString());
                 }
+
+                HierarchicalTree hierarchicalTree = new HierarchicalTree();
+                HierarchicalGrouper.HierarchicalGrouper grouper = new HierarchicalGrouper.HierarchicalGrouper();
+                hierarchicalTree = grouper.GetHierarchucalTree(distances);
+            }
+            catch (FormatException) {
+                MessageBox.Show(@"Incorret format data in distance table.");
+            }
+            catch (Exception exception) {
+                MessageBox.Show(exception.Message);
             }
 
-            HierarchicalTree hierarchicalTree = new HierarchicalTree();
-            hierarchicalTree.getHierarchucalTree(distances);
+            
+
         }
     }
 }

@@ -1,44 +1,36 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace HierarchicalGrouper
 {
-    class Distances : IEnumerable
+    internal class Distances : IEnumerable
     {
         private readonly List<DistanceNode> _distancesList;
 
-        public Distances()
-        {
-            _distancesList = new List<DistanceNode>();
-        }
-
-        public Distances(int[][] distances)
+        public Distances(double[][] distances)
         {
             _distancesList = new List<DistanceNode>();
             InitializeDistances(distances);
         }
 
-        public void AddDistance(DistanceNode distanceNode)
+        public IEnumerator GetEnumerator()
         {
-            _distancesList.Add(distanceNode);
+            return _distancesList.GetEnumerator();
         }
 
         public void DeleteDistance(DistanceNode distanceNode)
         {
-            _distancesList.Remove(distanceNode);
+            var count = GetCountDistance(distanceNode);
+            for (var i = 0; i < count; i++) _distancesList.Remove(distanceNode);
         }
 
-        private void InitializeDistances(int[][] distances)
+        private void InitializeDistances(double[][] distances)
         {
-            for (int i = 0; i < distances.Length - 1; i++) {
-                for (int j = i + 1; j < distances[i].Length; j++) {
-                    _distancesList.Add(new DistanceNode("x" + (i + 1), "x" + (j + 1),
-                        distances[i][j]));
-                }
-            }
-            foreach (var distanceNode in _distancesList) {
-                System.Console.WriteLine(distanceNode.ToString());
-            }
+            for (var i = 0; i < distances.Length - 1; i++)
+            for (var j = i + 1; j < distances[i].Length; j++)
+                _distancesList.Add(new DistanceNode("x" + (i + 1), "x" + (j + 1),
+                    distances[i][j]));
         }
 
         public int GetCount()
@@ -48,18 +40,24 @@ namespace HierarchicalGrouper
 
         public DistanceNode GetMinimalDistanceNode()
         {
-            DistanceNode resultNode = _distancesList[0];
-            foreach (var distanceNode in _distancesList) {
-                if (distanceNode.Distance > resultNode.Distance) {
-                    resultNode = distanceNode;
-                }
-            }
+            var resultNode = _distancesList[0];
+            foreach (var distanceNode in _distancesList)
+                if (distanceNode.Distance < resultNode.Distance) resultNode = distanceNode;
             return resultNode;
         }
 
-        public IEnumerator GetEnumerator()
+        private int GetCountDistance(DistanceNode distanceNode)
         {
-            return _distancesList.GetEnumerator();
+            var count = 0;
+            foreach (var node in _distancesList) if (node.CrossEquals(distanceNode)) count++;
+            return count;
+        }
+
+        public void RenameNodesInDistancesList(DistanceNode minimalDistanceNode, char id)
+        {
+            foreach (DistanceNode distance in _distancesList)
+                if (distance.Equals(minimalDistanceNode))
+                    distance.ReplaceId(minimalDistanceNode, id);
         }
     }
 }

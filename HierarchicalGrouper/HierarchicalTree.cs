@@ -4,33 +4,55 @@ namespace HierarchicalGrouper
 {
     public class HierarchicalTree
     {
-        public List<TreeNode> getHierarchucalTree(int[][] distances)
+        private readonly List<TreeNode> _hierarchicalTree;
+
+        public HierarchicalTree()
         {
-            List<TreeNode> hierarchicalTree = new List<TreeNode>();
-
-            Distances distancesList = new Distances(distances);
-
-            while (distancesList.GetCount() > 0) {
-                DistanceNode minimalDistanceNode = distancesList.GetMinimalDistanceNode();
-                distancesList.DeleteDistance(minimalDistanceNode); 
-                Distances TempDistances = GenerateTempDistancesList(distancesList, minimalDistanceNode);
-            }
-
-            return hierarchicalTree;
+            _hierarchicalTree = new List<TreeNode>();
         }
 
-        private Distances GenerateTempDistancesList(Distances distances, DistanceNode minimalDistanceNode)
+        public void AddTreeNode(TreeNode treeNode)
         {
-            Distances resultDistances = new Distances();
+            _hierarchicalTree.Add(treeNode);
+        }
 
-            foreach (DistanceNode distance in distances) {
-                if (distance == minimalDistanceNode) {
-                    resultDistances.AddDistance(distance);
-                    distances.DeleteDistance(distance);
+        private TreeNode GetParenTreeNode(TreeNode treeNode, int startIndex)
+        {
+            for (int i = startIndex + 1; i < _hierarchicalTree.Count; i++) {
+                if (treeNode.FirstNode == null && treeNode.SecondNode == null) {
+                    if (_hierarchicalTree[i].FirstNode != null && _hierarchicalTree[i].SecondNode != null) {
+                        if (_hierarchicalTree[i].FirstNode.Name == treeNode.Name ||
+                            _hierarchicalTree[i].SecondNode.Name == treeNode.Name)
+                            return _hierarchicalTree[i];
+                    }
+                    continue;
                 }
+                if (_hierarchicalTree[i].FirstNode?.FirstNode == treeNode.FirstNode &&
+                    _hierarchicalTree[i].FirstNode?.SecondNode == treeNode.SecondNode ||
+                    _hierarchicalTree[i].SecondNode?.FirstNode == treeNode.FirstNode &&
+                    _hierarchicalTree[i].SecondNode?.SecondNode == treeNode.SecondNode)
+                    return _hierarchicalTree[i];
+            }
+            return null;
+        }
+
+        public TreeNode GetTreeNode(string nodeName)
+        {
+            int i;
+            for (i = 0; i < _hierarchicalTree.Count; i++) {
+                if (_hierarchicalTree[i].Name == nodeName) break;
             }
 
-            return resultDistances;
+            return _hierarchicalTree[i];
+        }
+
+        public void SetParentNodeToAllNode()
+        {
+            for (int i = _hierarchicalTree.Count - 2; i >= 0; i--)
+            {
+                TreeNode treeNode = _hierarchicalTree[i];
+                treeNode.ParentNode = GetParenTreeNode(treeNode, i);
+            }
         }
     }
 }
