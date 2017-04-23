@@ -11,6 +11,11 @@ namespace HierarchicalGrouper
             _hierarchicalTree = new List<TreeNode>();
         }
 
+        public int GetCountNodes()
+        {
+            return _hierarchicalTree.Count;
+        }
+
         public void AddTreeNode(TreeNode treeNode)
         {
             _hierarchicalTree.Add(treeNode);
@@ -18,13 +23,12 @@ namespace HierarchicalGrouper
 
         private TreeNode GetParenTreeNode(TreeNode treeNode, int startIndex)
         {
-            for (int i = startIndex + 1; i < _hierarchicalTree.Count; i++) {
+            for (var i = startIndex + 1; i < _hierarchicalTree.Count; i++) {
                 if (treeNode.FirstNode == null && treeNode.SecondNode == null) {
-                    if (_hierarchicalTree[i].FirstNode != null && _hierarchicalTree[i].SecondNode != null) {
+                    if (_hierarchicalTree[i].FirstNode != null && _hierarchicalTree[i].SecondNode != null)
                         if (_hierarchicalTree[i].FirstNode.Name == treeNode.Name ||
                             _hierarchicalTree[i].SecondNode.Name == treeNode.Name)
                             return _hierarchicalTree[i];
-                    }
                     continue;
                 }
                 if (_hierarchicalTree[i].FirstNode?.FirstNode == treeNode.FirstNode &&
@@ -39,18 +43,20 @@ namespace HierarchicalGrouper
         public TreeNode GetTreeNode(string nodeName)
         {
             int i;
-            for (i = 0; i < _hierarchicalTree.Count; i++) {
-                if (_hierarchicalTree[i].Name == nodeName) break;
-            }
+            for (i = 0; i < _hierarchicalTree.Count; i++) if (_hierarchicalTree[i].Name == nodeName) break;
 
             return _hierarchicalTree[i];
         }
 
+        public TreeNode GetTreeNode(int index)
+        {
+            return _hierarchicalTree[index];
+        }
+
         public void SetParentNodeToAllNode()
         {
-            for (int i = _hierarchicalTree.Count - 2; i >= 0; i--)
-            {
-                TreeNode treeNode = _hierarchicalTree[i];
+            for (var i = _hierarchicalTree.Count - 2; i >= 0; i--) {
+                var treeNode = _hierarchicalTree[i];
                 treeNode.ParentNode = GetParenTreeNode(treeNode, i);
             }
         }

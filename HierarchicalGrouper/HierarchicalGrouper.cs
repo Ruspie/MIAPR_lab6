@@ -4,7 +4,7 @@
     {
         private char _id;
 
-        public HierarchicalTree GetHierarchucalTree(double[][] distances)
+        public HierarchicalTree GetHierarchucalTree(int[][] distances)
         {
             _id = 'a';
 
@@ -12,8 +12,8 @@
 
             var distancesList = new Distances(distances);
 
-            for (int i = 0; i < distances.Length; i++) {
-                TreeNode treeNode = new TreeNode("x" + (i + 1), 0);
+            for (var i = 0; i < distances.Length; i++) {
+                var treeNode = new TreeNode("x" + (i + 1), 0);
                 hierarchicalTree.AddTreeNode(treeNode);
             }
 
@@ -23,7 +23,7 @@
 
                 distancesList.RenameNodesInDistancesList(minimalDistanceNode, _id);
 
-                TreeNode treeNode = new TreeNode(_id.ToString(), minimalDistanceNode.Distance,
+                var treeNode = new TreeNode(_id.ToString(), minimalDistanceNode.Distance,
                     hierarchicalTree.GetTreeNode(minimalDistanceNode.FirstId),
                     hierarchicalTree.GetTreeNode(minimalDistanceNode.SecondId));
 
@@ -36,7 +36,5 @@
 
             return hierarchicalTree;
         }
-
-      
     }
 }

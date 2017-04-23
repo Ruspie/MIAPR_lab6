@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace HierarchicalGrouper
@@ -8,7 +7,7 @@ namespace HierarchicalGrouper
     {
         private readonly List<DistanceNode> _distancesList;
 
-        public Distances(double[][] distances)
+        public Distances(int[][] distances)
         {
             _distancesList = new List<DistanceNode>();
             InitializeDistances(distances);
@@ -25,7 +24,7 @@ namespace HierarchicalGrouper
             for (var i = 0; i < count; i++) _distancesList.Remove(distanceNode);
         }
 
-        private void InitializeDistances(double[][] distances)
+        private void InitializeDistances(int[][] distances)
         {
             for (var i = 0; i < distances.Length - 1; i++)
             for (var j = i + 1; j < distances[i].Length; j++)
@@ -55,7 +54,7 @@ namespace HierarchicalGrouper
 
         public void RenameNodesInDistancesList(DistanceNode minimalDistanceNode, char id)
         {
-            foreach (DistanceNode distance in _distancesList)
+            foreach (var distance in _distancesList)
                 if (distance.Equals(minimalDistanceNode))
                     distance.ReplaceId(minimalDistanceNode, id);
         }
